@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Advanced Calculator</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+<body class="dark-mode">
+    <div class="calculator-container">
+        <div class="mode-switcher">
+            <button class="mode-btn active" data-mode="calculator">Calculator</button>
+            <button class="mode-btn" data-mode="scientific">Scientific</button>
+            <button class="mode-btn" data-mode="converter">Converter</button>
+        </div>
+
+        <div class="calculator" id="calculator">
+            <div class="controls">
+                <button class="theme-toggle" id="theme-toggle">
+                    <i class="fas fa-moon"></i>
+                </button>
+                <button class="history-toggle" id="history-toggle">
+                    <i class="fas fa-history"></i>
+                </button>
+            </div>
+
+            <div class="display">
+                <div class="expression"></div>
+                <div class="result">0</div>
+            </div>
+
+            <div class="keypad">
+                <button class="btn operator" data-action="clear">AC</button>
+                <button class="btn operator" data-action="delete">⌫</button>
+                <button class="btn operator" data-action="percent">%</button>
+                <button class="btn operator" data-action="divide">÷</button>
+
+                <button class="btn number">7</button>
+                <button class="btn number">8</button>
+                <button class="btn number">9</button>
+                <button class="btn operator" data-action="multiply">×</button>
+
+                <button class="btn number">4</button>
+                <button class="btn number">5</button>
+                <button class="btn number">6</button>
+                <button class="btn operator" data-action="subtract">−</button>
+
+                <button class="btn number">1</button>
+                <button class="btn number">2</button>
+                <button class="btn number">3</button>
+                <button class="btn operator" data-action="add">+</button>
+
+                <button class="btn number">0</button>
+                <button class="btn number" data-action="decimal">.</button>
+                <button class="btn equals" data-action="calculate">=</button>
+            </div>
+        </div>
+
+        <div class="scientific-calculator" id="scientific" style="display: none;">
+            <div class="controls">
+                <button class="theme-toggle" id="theme-toggle-scientific">
+                    <i class="fas fa-moon"></i>
+                </button>
+                <button class="history-toggle" id="history-toggle-scientific">
+                    <i class="fas fa-history"></i>
+                </button>
+            </div>
+
+            <div class="display">
+                <div class="expression"></div>
+                <div class="result">0</div>
+            </div>
+
+            <div class="scientific-keypad">
+                <button class="btn function" data-action="sin">sin</button>
+                <button class="btn function" data-action="cos">cos</button>
+                <button class="btn function" data-action="tan">tan</button>
+                <button class="btn operator" data-action="divide">÷</button>
+
+                <button class="btn function" data-action="log">log</button>
+                <button class="btn function" data-action="ln">ln</button>
+                <button class="btn function" data-action="pi">π</button>
+                <button class="btn operator" data-action="multiply">×</button>
+
+                <button class="btn function" data-action="square">x²</button>
+                <button class="btn function" data-action="sqrt">√</button>
+                <button class="btn function" data-action="power">xʸ</button>
+                <button class="btn operator" data-action="subtract">−</button>
+
+                <button class="btn number">7</button>
+                <button class="btn number">8</button>
+                <button class="btn number">9</button>
+                <button class="btn operator" data-action="add">+</button>
+
+                <button class="btn number">4</button>
+                <button class="btn number">5</button>
+                <button class="btn number">6</button>
+                <button class="btn function" data-action="exp">EXP</button>
+
+                <button class="btn number">1</button>
+                <button class="btn number">2</button>
+                <button class="btn number">3</button>
+                <button class="btn function" data-action="factorial">x!</button>
+
+                <button class="btn number">0</button>
+                <button class="btn number" data-action="decimal">.</button>
+                <button class="btn function" data-action="clear">AC</button>
+                <button class="btn operator" data-action="delete">⌫</button>
+
+                <button class="btn equals" data-action="calculate">=</button>
+            </div>
+        </div>
+
+        <div class="converter" id="converter" style="display: none;">
+            <div class="converter-tabs">
+                <button class="tab-btn active" data-tab="unit">Unit Converter</button>
+                <button class="tab-btn" data-tab="currency">Currency Converter</button>
+            </div>
+
+            <div class="converter-content">
+                <div class="unit-converter" id="unit-converter">
+                    <div class="converter-group">
+                        <select class="converter-type" id="unit-type">
+                            <option value="length">Length</option>
+                            <option value="weight">Weight</option>
+                            <option value="temperature">Temperature</option>
+                            <option value="area">Area</option>
+                            <option value="volume">Volume</option>
+                        </select>
+                    </div>
+                    <div class="converter-inputs">
+                        <div class="input-group">
+                            <input type="number" class="converter-input" id="from-value">
+                            <select class="converter-unit" id="from-unit"></select>
+                        </div>
+                        <div class="converter-arrow">
+                            <i class="fas fa-exchange-alt"></i>
+                        </div>
+                        <div class="input-group">
+                            <input type="number" class="converter-input" id="to-value" readonly>
+                            <select class="converter-unit" id="to-unit"></select>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="currency-converter" id="currency-converter" style="display: none;">
+                    <div class="converter-inputs">
+                        <div class="input-group">
+                            <input type="number" class="converter-input" id="from-amount">
+                            <select class="currency-select" id="from-currency"></select>
+                        </div>
+                        <div class="converter-arrow">
+                            <i class="fas fa-exchange-alt"></i>
+                        </div>
+                        <div class="input-group">
+                            <input type="number" class="converter-input" id="to-amount" readonly>
+                            <select class="currency-select" id="to-currency"></select>
+                        </div>
+                    </div>
+                    <div class="exchange-rate" id="exchange-rate"></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="history-panel">
+            <div class="history-header">
+                <h3>History</h3>
+                <button class="clear-history">
+                    <i class="fas fa-trash"></i>
+                </button>
+            </div>
+            <div class="history-list"></div>
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
